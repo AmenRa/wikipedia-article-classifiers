@@ -56,12 +56,18 @@ X = scaler.transform(X)
 # MIE FEATURES
 # 10-fold cross-validation with logistic regression PREDICTIONS
 # random_state=1 per tutte le classi, random_state = 8 solo fa non-fa
-clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(23), max_iter=10000, random_state=1)
+layers = [47]
+clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=1000, random_state=1)
 y_pred = cross_val_predict(clf, X, y, cv=10)
 
+print 'Layers: ' + str(layers)
 print metrics.classification_report(y, y_pred) 
 print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
 print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+
 ###############################################################################
 
 
