@@ -16,12 +16,12 @@ from sklearn.model_selection import train_test_split
 
 
 # IMPORT DATASET
-#data = pd.read_csv(open('dataset.csv'))
+data = pd.read_csv(open('dataset.csv'))
 #data = pd.read_csv(open('oldDataset.csv'))
 #data = shuffle(data)
 
 # only featured/non-featured articles classification
-data = pd.read_csv(open('twoClassDataset.csv'))
+#data = pd.read_csv(open('twoClassDataset.csv'))
 
 # Feature list
 #features_cols = ["characterCount", "wordCount", "syllableCount", "sentenceCount", "sectionCount", "subsectionCount", "paragraphCount", "meanSectionSize", "meanParagraphSize", "largestSectionSize", "shortestSectionSize", "largestShortestSectionRatio", "sectionSizeStandardDeviation", "meanOfSubsectionsPerSection", "abstractSize", "abstractSizeArtcileLengthRatio", "citationCount", "citationCountPerSentence", "citationCountPerSection", "externalLinksCount", "externalLinksPerSentence", "externalLinksPerSection", "imageCount", "imagePerSentence", "imagePerSection", "meanSentenceSize", "largestSentenceSize", "shortestSentenceSize", "largeSentenceRate", "shortSentenceRate", "questionCount", "questionRatio", "exclamationCount", "exclamationRatio", "toBeVerbCount", "toBeVerbRatio", "toBeVerbPerSentence", "toBeVerbRate", "automatedReadabilityIndex", "colemanLiauIndex", "fleshReadingEase", "fleschKincaidGradeLevel", "gunningFogIndex", "lasbarhetsIndex", "smogGrading", "daleChallReadabilityFormula", "differentWordCount", "differentWordsPerSentence", "differentWordsRate", "nounCount", "nounsPerSentence", "nounsRate", "differentNounCount", "differentNounsPerSentence", "differentNounsRate", "verbCount", "verbsPerSentence", "verbsRate", "differentVerbCount", "differentVerbsPerSentence", "differentVerbsRate", "pronounCount", "pronounsPerSentence", "pronounsRate", "differentPronounCount", "differentPronounsPerSentence", "differentPronounsRate", "adjectiveCount", "adjectivesPerSentence", "differentAdjectiveCount", "differentAdjectivesPerSentence", "differentAdjectivesRate", "adverbCount", "adverbsPerSentence", "adverbsRate", "differentAdverbCount", "differentAdverbsPerSentence", "differentAdverbsRate", "coordinatingConjunctionCount", "coordinatingConjunctionsPerSentence", "coordinatingConjunctionsRate", "differentCoordinatingConjunctionCount", "differentCoordinatingConjunctionsPerSentence", "differentCoordinatingConjunctionsRate", "subordinatingPrepositionAndConjunctionCount", "subordinatingPrepositionsAndConjunctionsPerSentence", "subordinatingPrepositionsAndConjunctionsRate", "differentSubordinatingPrepositionAndConjunctionCount", "differentSubordinatingPrepositionsAndConjunctionsPerSentence", "differentSubordinatingPrepositionsAndConjunctionsRate", "syllablesPerWord", "charactersPerWord", "differentNounsDifferentWordsRatio", "differentVerbsDifferentWordsRatio", "differentPronounsDifferentWordsRatio", "differentAdjectivesDifferentWordsRatio", "differentAdverbsDifferentWordsRatio", "differentCoordinatingConjunctionsDifferentWordsRatio", "differentSubordinatingPrepositionsAndConjunctionsDifferentWordsRatio"]
@@ -81,13 +81,70 @@ y = data.qualityClass
 
 
 # 10-fold cross-validation with logistic regression PREDICTIONS
+#clf = LogisticRegression()
+#y_pred = cross_val_predict(clf, X, y, cv=10)
+#
+#print metrics.classification_report(y, y_pred) 
+#print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+#print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+
+
+
+
+
+#print 'BEFORE Feature Selection'
+## 10-fold cross-validation with logistic regression PREDICTIONS
+#clf = LogisticRegression()
+#y_pred = cross_val_predict(clf, X, y, cv=10)
+#
+##print metrics.classification_report(y, y_pred) 
+#print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+##print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+
+
+
+
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import chi2
+
+#k_range = range(1, 100)
+#k_scores = []
+#for k in k_range:
+#    X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
+#    clf = LogisticRegression()
+#    y_pred = cross_val_predict(clf, X_new, y, cv=10)
+#    print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+#    k_scores.append(metrics.accuracy_score(y, y_pred))
+#print k_scores
+#
+#import matplotlib.pyplot as plt
+##%matplotlib inline
+#
+## plot the value of K for KNN (x-axis) versus the cross-validated accuracy (y-axis)
+#plt.plot(k_range, k_scores)
+#plt.xlabel('Value of K ')
+#plt.ylabel('Cross-Validated Accuracy')
+
+            
+            
+
+
+
+X_new = SelectKBest(chi2, k=89).fit_transform(X, y)
+print 'AFTER Feature Selection'
+# 10-fold cross-validation with logistic regression PREDICTIONS
 clf = LogisticRegression()
-y_pred = cross_val_predict(clf, X, y, cv=10)
+y_pred = cross_val_predict(clf, X_new, y, cv=10)
 
-print metrics.classification_report(y, y_pred) 
+#print metrics.classification_report(y, y_pred) 
 print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
-
+#print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
