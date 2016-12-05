@@ -95,14 +95,14 @@ y = data.qualityClass
 
 
 
-#print 'BEFORE Feature Selection'
-## 10-fold cross-validation with logistic regression PREDICTIONS
-#clf = LogisticRegression()
-#y_pred = cross_val_predict(clf, X, y, cv=10)
-#
-##print metrics.classification_report(y, y_pred) 
-#print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-##print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+print 'BEFORE Feature Selection'
+# 10-fold cross-validation with logistic regression PREDICTIONS
+clf = LogisticRegression()
+y_pred = cross_val_predict(clf, X, y, cv=10)
+
+#print metrics.classification_report(y, y_pred) 
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+#print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
@@ -136,15 +136,15 @@ from sklearn.feature_selection import chi2
 
 
 
-X_new = SelectKBest(chi2, k=89).fit_transform(X, y)
-print 'AFTER Feature Selection'
-# 10-fold cross-validation with logistic regression PREDICTIONS
-clf = LogisticRegression()
-y_pred = cross_val_predict(clf, X_new, y, cv=10)
-
-#print metrics.classification_report(y, y_pred) 
-print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-#print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+#X_new = SelectKBest(chi2, k=89).fit_transform(X, y)
+#print 'AFTER Feature Selection'
+## 10-fold cross-validation with logistic regression PREDICTIONS
+#clf = LogisticRegression()
+#y_pred = cross_val_predict(clf, X_new, y, cv=10)
+#
+##print metrics.classification_report(y, y_pred) 
+#print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+##print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
