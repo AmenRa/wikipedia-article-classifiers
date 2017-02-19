@@ -24,6 +24,7 @@ import random
 
 # Change it with the name of your dataset
 filename = 'MHDataset.csv'
+# filename = 'MHParallelDataset.csv'
 
 # Extract columns names (fieldnames)
 with open(filename, 'r') as infile:
@@ -38,81 +39,18 @@ data = pd.read_csv(open(filename))
 
 
 # Feature list
-# features_cols = fieldnames
+features_cols = fieldnames
 
-features_cols = [
-"differentWordsRate",
-"registeredReviewRate",
-"abstractSizeArtcileLengthRatio",
-"differentVerbsDifferentWordsRatio",
-"occasionalUserRate",
-"diversity",
-"numberOfSentencesThatStartWithANounRatio",
-"localClusteringCoefficient",
-"numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunctionRatio",
-"assortativity_outin",
-"lastThreeMonthsReviewRate",
-"assortativity_outout",
-"registeredUserRate",
-"numberOfSentencesThatStartWithAnAdverbRatio",
-"differentAdverbsPerSentence",
-"adverbsPerSentence",
-"shortSentenceRate",
-"differentCoordinatingConjunctionsPerSentence",
-"externalLinksPerTextLength",
-"modalAuxiliaryVerbsPerSentence",
-"differentPronounsPerSentence",
-"differentVerbsPerSentence",
-"numberOfSentencesThatStartWithAPronounRatio",
-"numberOfSentencesThatStartWithAnArticleRatio",
-"anonymouseReviewRate",
-"reviewPerDay",
-"numberOfSentencesThatStartWithADeterminerRatio",
-"revertReviewRatio",
-"verbsPerSentence",
-"passiveVoicePerSentence",
-"toBeVerbRatio",
-"reviewsPerUser",
-"passiveVoiceRatio",
-"differentSubordinatingPrepositionsAndConjunctionsDifferentWordsRatio",
-"numberOfSentencesThatStartWithAnAdjectiveRatio",
-"differentAdjectivesPerSentence",
-"differentWordsPerSentence",
-"differentNounsPerSentence",
-"citationCountPerTextLength",
-"charactersPerWord",
-"imagePerTextLength",
-"coordinatingConjunctionsPerSentence",
-"subordinatingPrepositionsAndConjunctionsPerSentence",
-"fleschKincaidGradeLevel",
-"smogGrading",
-"gunningFogIndex",
-"automatedReadabilityIndex",
-"modalAuxiliaryVerbsRatio",
-"colemanLiauIndex",
-"reviewsPerUserStdDev",
-"anonymouseUserRate",
-"differentAdjectivesDifferentWordsRatio",
-"pronounsPerSentence",
-"largeSentenceRate",
-"differentNounsDifferentWordsRatio",
-"adjectivesPerSentence",
-"revertCount",
-"nounsPerSentence",
-"nounsRate",
-"differentNounsRate",
-"meanSentenceSize",
-"meanOfSubsectionsPerSection",
-"assortativity_inin",
-"sectionCount",
-"questionCount",
-"toBeVerbPerSentence",
-"IN,PRP$,NN",
-"differentSubordinatingPrepositionsAndConjunctionsRate",
-"daleChallReadabilityFormula",
-"imagePerSection"
-]
+# Text features
+# features_cols = [ "characterCount", "wordCount", "syllableCount", "sentenceCount", "sectionCount", "subsectionCount", "paragraphCount", "meanSectionSize", "meanParagraphSize", "largestSectionSize", "shortestSectionSize", "largestShortestSectionRatio", "sectionSizeStandardDeviation", "meanOfSubsectionsPerSection", "abstractSize", "abstractSizeArtcileLengthRatio", "citationCount", "citationCountPerTextLength", "citationCountPerSection", "externalLinksCount", "externalLinksPerTextLength", "externalLinksPerSection", "imageCount", "imagePerTextLength", "imagePerSection", "meanSentenceSize", "largestSentenceSize", "shortestSentenceSize", "largeSentenceRate", "shortSentenceRate", "questionCount", "questionRatio", "exclamationCount", "exclamationRatio", "toBeVerbCount", "toBeVerbRatio", "toBeVerbPerSentence", "toBeVerbRate", "modalAuxiliaryVerbCount", "modalAuxiliaryVerbsRatio", "modalAuxiliaryVerbsPerSentence", "modalAuxiliaryVerbsRate", "passiveVoiceCount", "passiveVoiceRatio", "passiveVoicePerSentence", "passiveVoiceRate", "numberOfSentencesThatStartWithACoordinatingConjunction", "numberOfSentencesThatStartWithADeterminer", "numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunction", "numberOfSentencesThatStartWithAnAdjective", "numberOfSentencesThatStartWithANoun", "numberOfSentencesThatStartWithAPronoun", "numberOfSentencesThatStartWithAnAdverb", "numberOfSentencesThatStartWithAnArticle", "numberOfSentencesThatStartWithACoordinatingConjunctionRatio", "numberOfSentencesThatStartWithADeterminerRatio", "numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunctionRatio", "numberOfSentencesThatStartWithAnAdjectiveRatio", "numberOfSentencesThatStartWithANounRatio", "numberOfSentencesThatStartWithAPronounRatio", "numberOfSentencesThatStartWithAnAdverbRatio", "numberOfSentencesThatStartWithAnArticleRatio", "automatedReadabilityIndex", "colemanLiauIndex", "fleshReadingEase", "fleschKincaidGradeLevel", "gunningFogIndex", "lasbarhetsIndex", "smogGrading", "daleChallReadabilityFormula", "differentWordCount", "differentWordsPerSentence", "differentWordsRate", "nounCount", "nounsPerSentence", "nounsRate", "differentNounCount", "differentNounsPerSentence", "differentNounsRate", "differentNounsDifferentWordsRatio", "verbCount", "verbsPerSentence", "verbsRate", "differentVerbCount", "differentVerbsPerSentence", "differentVerbsRate", "differentVerbsDifferentWordsRatio", "pronounCount", "pronounsPerSentence", "pronounsRate", "differentPronounCount", "differentPronounsPerSentence", "differentPronounsRate", "differentPronounsDifferentWordsRatio", "adjectiveCount", "adjectivesPerSentence", "adjectivesRate", "differentAdjectiveCount", "differentAdjectivesPerSentence", "differentAdjectivesRate", "differentAdjectivesDifferentWordsRatio", "adverbCount", "adverbsPerSentence", "adverbsRate", "differentAdverbCount", "differentAdverbsPerSentence", "differentAdverbsRate", "differentAdverbsDifferentWordsRatio", "coordinatingConjunctionCount", "coordinatingConjunctionsPerSentence", "coordinatingConjunctionsRate", "differentCoordinatingConjunctionCount", "differentCoordinatingConjunctionsPerSentence", "differentCoordinatingConjunctionsRate", "differentCoordinatingConjunctionsDifferentWordsRatio", "subordinatingPrepositionAndConjunctionCount", "subordinatingPrepositionsAndConjunctionsPerSentence", "subordinatingPrepositionsAndConjunctionsRate", "differentSubordinatingPrepositionAndConjunctionCount", "differentSubordinatingPrepositionsAndConjunctionsPerSentence", "differentSubordinatingPrepositionsAndConjunctionsRate", "differentSubordinatingPrepositionsAndConjunctionsDifferentWordsRatio", "syllablesPerWord", "charactersPerWord", "NNP,NNP,NNP", "VBD,DT,JJ", "IN,DT,NNP", "NNP,IN,DT", "DT,NNP,NNP", "JJ,NN,IN", "NN,IN,DT", "IN,DT,NN", "NN,IN,NNP", "IN,NNP,NNP", "NNP,VBD,DT", "VBD,DT,NN", "DT,NN,IN", "VBD,VBN,IN", "NNP,NNP,VBD", "IN,NN,IN", "NNP,NNP,IN", "NNP,IN,NNP", "VBD,IN,DT", "IN,DT,JJ", "JJ,NNS,IN", "DT,JJ,NN", "IN,DT,NNS", "IN,CD,NNP", "VBN,IN,DT", "DT,NN,NN", "IN,PRP$,NN", "NNP,VBD,VBN", "NNP,CC,NNP", "NNS,IN,DT", "NN,IN,NN", "DT,NN,VBD", "NN,VBD,VBN", "TO,VB,DT", "NNP,POS,NN", "ter", "er_", "_wa", "was", "as_", "s_a", "_a_", "an_", "e_a", "_an", "and", "nd_", "_re", "ent", "_of", "of_", "f_t", "_th", "the", "he_", "on_", ",_a", "at_", "ed_", "_on", "n_t", "or_", "ing", "ng_", "_in", "in_", "d_t", "d_a", "_he", "_to", "ted", "th_", "al_", "es_", "ate", "_co", "ion", "ere", "_fo", "for", "s,_", "to_", "ati", "st_", "re_", "_be", "ly_", "her", "_hi", "his", "is_", "e_t", "en_", "e_o", "t_t", "tio", "_Th" ]
 
+# Review Features
+# features_cols = [ "age", "agePerReview", "reviewPerDay", "reviewsPerUser", "reviewsPerUserStdDev", "discussionCount", "reviewCount", "registeredReviewCount", "anonymouseReviewCount", "registeredReviewRate", "anonymouseReviewRate", "registeredAnonymouseReviewRatio", "userCount", "occasionalUserCount", "occasionalUserRate", "registeredUserCount", "anonymouseUserCount", "registerdAnonymouseUserRatio", "registeredUserRate", "anonymouseUserRate", "revertCount", "revertReviewRatio", "diversity", "modifiedLinesRate", "mostActiveUsersReviewCount", "mostActiveUsersReviewRate", "lastThreeMonthsReviewCount", "lastThreeMonthsReviewRate" ]
+
+# Network Features
+# features_cols = ["pageRank", "indegree", "outdegree", "assortativity_inin", "assortativity_inout", "assortativity_outin", "assortativity_outout", "localClusteringCoefficient", "reciprocity", "linkCount", "translationCount" ]
+
+# ARTICLE'S Feature
 # features_cols = ["characterCount", "wordCount", "sentenceCount", "sectionCount", "meanSectionSize", "meanParagraphSize", "largestSectionSize", "shortestSectionSize", "sectionSizeStandardDeviation", "subsectionCount", "meanOfSubsectionsPerSection", "abstractSize", "citationCount", "citationCountPerTextLength", "citationCountPerSection", "externalLinksPerTextLength", "externalLinksCount", "externalLinksPerSection", "imageCount", "imagePerSection", "largestSentenceSize", "largeSentenceRate", "shortSentenceRate", "modalAuxiliaryVerbCount", "questionCount", "pronounCount", "passiveVoiceCount", "coordinatingConjunctionsRate", "subordinatingPrepositionsAndConjunctionsRate", "toBeVerbRate", "numberOfSentencesThatStartWithACoordinatingConjunction", "numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunction", "numberOfSentencesThatStartWithAPronoun", "numberOfSentencesThatStartWithAnArticle", "automatedReadabilityIndex", "colemanLiauIndex", "fleshReadingEase", "fleschKincaidGradeLevel", "gunningFogIndex", "lasbarhetsIndex", "smogGrading", "age", "agePerReview", "reviewPerDay", "reviewsPerUser", "reviewsPerUserStdDev", "discussionCount", "userCount", "anonymouseUserCount", "reviewCount", "modifiedLinesRate", "lastThreeMonthsReviewRate", "mostActiveUsersReviewRate", "pageRank", "indegree", "outdegree", "assortativity_inin", "assortativity_inout", "assortativity_outin", "assortativity_outout", "localClusteringCoefficient", "reciprocity", "linkCount", "translationCount"]
 
 
@@ -132,6 +70,12 @@ y = data.qualityClass
 # y[y == 6] = 3
 # y[y == 7] = 4
 
+# STUB and NON-STUB
+# y[y > 1] = 2
+
+# FEATURED ARTICLES and NON-FEATURED ARTICLES
+y[y < 7] = 1
+y[y == 7] = 2
 
 
 # FEATURE SELECTION
@@ -149,9 +93,22 @@ y = data.qualityClass
 
 # print len(X[0])
 
-# print 'BEFORE Feature Selection'
+print 'BEFORE Feature Selection'
+# 10-fold cross-validation with knn PREDICTIONS
+clf = RandomForestClassifier(n_estimators=142, random_state=6)
+y_pred = cross_val_predict(clf, X, y, cv=10)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+
+
+# print 'BEFORE Feature Selection PARALLEL'
 # # 10-fold cross-validation with knn PREDICTIONS
-# clf = RandomForestClassifier(n_estimators=142, random_state=6)
+# clf = RandomForestClassifier(n_estimators=200, random_state=5)
 # y_pred = cross_val_predict(clf, X, y, cv=10)
 #
 # print metrics.classification_report(y, y_pred)
@@ -160,14 +117,18 @@ y = data.qualityClass
 
 
 
-print 'AFTER Feature Selection'
-# 10-fold cross-validation with knn PREDICTIONS
-clf = RandomForestClassifier(n_estimators=1000, random_state=6)
-y_pred = cross_val_predict(clf, X, y, cv=10)
 
-print metrics.classification_report(y, y_pred)
-print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+# print 'AFTER Feature Selection'
+# # 10-fold cross-validation with knn PREDICTIONS
+# clf = RandomForestClassifier(n_estimators=1000, random_state=6)
+# y_pred = cross_val_predict(clf, X, y, cv=10)
+#
+# print metrics.classification_report(y, y_pred)
+# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
@@ -179,14 +140,15 @@ print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 #         if (X[pos]==x).all():
 #             print pos
 
-
-
-# USE THIS TO FIND BEST FEATURES
+# from sklearn.feature_selection import f_regression
+#
+# # USE THIS TO FIND BEST FEATURES
 # print "Starting features selection"
 # k_range = range(1, len(features_cols))
 # k_scores = []
 # for k in k_range:
-#   X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
+#   X_new = SelectKBest(f_regression, k=k).fit_transform(X, y)
+#   # X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
 #   clf = RandomForestClassifier(n_estimators=142, random_state=6)
 #   y_pred = cross_val_predict(clf, X_new, y, cv=10)
 #   print str(k) + ' Accuracy: ' + str(metrics.accuracy_score(y, y_pred))

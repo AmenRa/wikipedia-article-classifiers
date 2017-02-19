@@ -52,7 +52,7 @@ X = data[features_cols]
 y = data.qualityClass
 
 
-# print 'BEFORE Feature Selection'
+print 'BEFORE Feature Selection'
 # # 10-fold cross-validation with support vector classifier PREDICTIONS
 clf = LinearSVC(dual=False)
 y_pred = cross_val_predict(clf, X, y, cv=10)

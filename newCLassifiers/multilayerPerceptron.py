@@ -46,22 +46,36 @@ features_cols = fieldnames
 # Select only the columns corresponding to the features in the list
 X = data[features_cols]
 
+# NORMALIZE DATASET
+scaler = Normalizer().fit(X)
+X = scaler.transform(X)
+
 # X.sample(frac=1)
 
 # Select qualityClass as the response (y)
 y = data.qualityClass
 
 
-# print 'BEFORE Feature Selection'
+print 'BEFORE Feature Selection'
 # # 10-fold cross-validation with mlp PREDICTIONS
-layers = [21]
-clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=100, random_state=1)
+clf = MLPClassifier(solver='lbfgs', max_iter=100, random_state=1)
 y_pred = cross_val_predict(clf, X, y, cv=10)
 
-print 'Layers: ' + str(layers)
 print metrics.classification_report(y, y_pred)
 print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
 print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+# print 'BEFORE Feature Selection'
+# # # 10-fold cross-validation with mlp PREDICTIONS
+# layers = [21]
+# clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=100, random_state=1)
+# y_pred = cross_val_predict(clf, X, y, cv=10)
+#
+# print 'Layers: ' + str(layers)
+# print metrics.classification_report(y, y_pred)
+# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 

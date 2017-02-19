@@ -53,14 +53,14 @@ X = data[features_cols]
 y = data.qualityClass
 
 
-# print 'BEFORE Feature Selection'
-# # # 10-fold cross-validation with decision tree PREDICTIONS
-# clf = DecisionTreeClassifier(random_state=1)
-# y_pred = cross_val_predict(clf, X, y, cv=10)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+print 'BEFORE Feature Selection'
+# # 10-fold cross-validation with decision tree PREDICTIONS
+clf = DecisionTreeClassifier(random_state=1)
+y_pred = cross_val_predict(clf, X, y, cv=10)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
@@ -86,21 +86,21 @@ y = data.qualityClass
 
 
 
-# USE THIS TO FIND BEST FEATURES
-print "Starting features selection"
-k_range = range(1, len(features_cols))
-k_scores = []
-for k in k_range:
-  X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
-  clf = LogisticRegression()
-  y_pred = cross_val_predict(clf, X_new, y, cv=10)
-  print str(k) + ' Accuracy: ' + str(metrics.accuracy_score(y, y_pred))
-  k_scores.append(metrics.accuracy_score(y, y_pred))
-print k_scores
-
-#%matplotlib inline
-
-# plot the value of K (x-axis) versus the cross-validated accuracy (y-axis)
-plt.plot(k_range, k_scores)
-plt.xlabel('Value of K')
-plt.ylabel('Cross-Validated Accuracy')
+# # USE THIS TO FIND BEST FEATURES
+# print "Starting features selection"
+# k_range = range(1, len(features_cols))
+# k_scores = []
+# for k in k_range:
+#   X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
+#   clf = LogisticRegression()
+#   y_pred = cross_val_predict(clf, X_new, y, cv=10)
+#   print str(k) + ' Accuracy: ' + str(metrics.accuracy_score(y, y_pred))
+#   k_scores.append(metrics.accuracy_score(y, y_pred))
+# print k_scores
+#
+# #%matplotlib inline
+#
+# # plot the value of K (x-axis) versus the cross-validated accuracy (y-axis)
+# plt.plot(k_range, k_scores)
+# plt.xlabel('Value of K')
+# plt.ylabel('Cross-Validated Accuracy')

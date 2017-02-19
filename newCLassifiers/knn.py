@@ -106,19 +106,19 @@ print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
-# # search for an optimal value of K for KNN
-# k_range = range(1, 100)
-# k_scores = []
-# for k in k_range:
-#    clf = KNeighborsClassifier(n_neighbors=k)
-#    scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')
-#    k_scores.append(scores.mean())
-# print k_scores
-#
-# import matplotlib.pyplot as plt
-# #%matplotlib inline
-#
-# # plot the value of K for KNN (x-axis) versus the cross-validated accuracy (y-axis)
-# plt.plot(k_range, k_scores)
-# plt.xlabel('Value of K for KNN')
-# plt.ylabel('Cross-Validated Accuracy')
+# search for an optimal value of K for KNN
+k_range = range(1, 100)
+k_scores = []
+for k in k_range:
+   clf = KNeighborsClassifier(n_neighbors=k)
+   scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')
+   k_scores.append(scores.mean())
+print k_scores
+
+import matplotlib.pyplot as plt
+#%matplotlib inline
+
+# plot the value of K for KNN (x-axis) versus the cross-validated accuracy (y-axis)
+plt.plot(k_range, k_scores)
+plt.xlabel('Value of K for KNN')
+plt.ylabel('Cross-Validated Accuracy')
