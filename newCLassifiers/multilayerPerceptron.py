@@ -24,6 +24,7 @@ import random
 
 # Change it with the name of your dataset
 filename = 'MHDataset.csv'
+#filename = 'MHParallelDataset.csv'
 
 # Extract columns names (fieldnames)
 with open(filename, 'r') as infile:
@@ -46,6 +47,8 @@ features_cols = fieldnames
 # Select only the columns corresponding to the features in the list
 X = data[features_cols]
 
+X.sample(frac=1)
+
 # NORMALIZE DATASET
 scaler = Normalizer().fit(X)
 X = scaler.transform(X)
@@ -57,25 +60,15 @@ y = data.qualityClass
 
 
 print 'BEFORE Feature Selection'
-# # 10-fold cross-validation with mlp PREDICTIONS
-clf = MLPClassifier(solver='lbfgs', max_iter=100, random_state=1)
-y_pred = cross_val_predict(clf, X, y, cv=10)
+# 10-fold cross-validation with mlp PREDICTIONS
+layers = (50, 30)
+clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=1000, random_state=1)
+y_pred = cross_val_predict(clf, X, y, cv=20)
 
+print 'Layers: ' + str(layers)
 print metrics.classification_report(y, y_pred)
 print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
 print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
-
-
-# print 'BEFORE Feature Selection'
-# # # 10-fold cross-validation with mlp PREDICTIONS
-# layers = [21]
-# clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=100, random_state=1)
-# y_pred = cross_val_predict(clf, X, y, cv=10)
-#
-# print 'Layers: ' + str(layers)
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
