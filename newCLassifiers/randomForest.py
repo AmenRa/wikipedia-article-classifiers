@@ -74,8 +74,8 @@ y = data.qualityClass
 # y[y > 1] = 2
 
 # FEATURED ARTICLES and NON-FEATURED ARTICLES
-y[y < 7] = 1
-y[y == 7] = 2
+#y[y < 7] = 1
+#y[y == 7] = 2
 
 
 # FEATURE SELECTION
@@ -93,14 +93,38 @@ y[y == 7] = 2
 
 # print len(X[0])
 
-print 'BEFORE Feature Selection'
-# 10-fold cross-validation with knn PREDICTIONS
-clf = RandomForestClassifier(n_estimators=142, random_state=6)
-y_pred = cross_val_predict(clf, X, y, cv=10)
+# print 'BEFORE Feature Selection'
+# # 10-fold cross-validation with knn PREDICTIONS
+# clf = RandomForestClassifier(n_estimators=143, random_state=5)
+# y_pred = cross_val_predict(clf, X, y, cv=10)
+#
+# print metrics.classification_report(y, y_pred)
+# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
-print metrics.classification_report(y, y_pred)
-print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+# Accuracy 0.58 a 58, partire da 75
+
+k_range = range(1, 300)
+k_scores = []
+for k in k_range:
+   clf = RandomForestClassifier(n_estimators=k, random_state=5)
+   scores = cross_val_score(clf, X, y, cv=20, scoring='accuracy')
+   print str(k) + ' ' + str(scores.mean())
+   k_scores.append(scores.mean())
+print k_scores
+
+import matplotlib.pyplot as plt
+#%matplotlib inline
+
+# plot the value of K for KNN (x-axis) versus the cross-validated accuracy (y-axis)
+plt.plot(k_range, k_scores)
+plt.xlabel('Value of K for KNN')
+plt.ylabel('Cross-Validated Accuracy')
+
+
 
 
 

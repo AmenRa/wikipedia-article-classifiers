@@ -22,8 +22,8 @@ from sklearn.svm import LinearSVC
 from sklearn.neural_network import MLPClassifier
 
 # Change it with the name of your dataset
-# filename = 'MHDataset.csv'
-filename = 'MHParallelDataset.csv'
+filename = 'MHDataset.csv'
+# filename = 'MHParallelDataset.csv'
 
 # Extract columns names (fieldnames)
 with open(filename, 'r') as infile:
@@ -37,7 +37,10 @@ fieldnames.pop()
 data = pd.read_csv(open(filename))
 
 # Feature list
-features_cols = fieldnames
+#features_cols = fieldnames
+
+# ARTICLE'S Feature
+#features_cols = ["characterCount", "wordCount", "sentenceCount", "sectionCount", "meanSectionSize", "meanParagraphSize", "largestSectionSize", "shortestSectionSize", "sectionSizeStandardDeviation", "subsectionCount", "meanOfSubsectionsPerSection", "abstractSize", "citationCount", "citationCountPerTextLength", "citationCountPerSection", "externalLinksPerTextLength", "externalLinksCount", "externalLinksPerSection", "imageCount", "imagePerSection", "largestSentenceSize", "largeSentenceRate", "shortSentenceRate", "modalAuxiliaryVerbCount", "questionCount", "pronounCount", "passiveVoiceCount", "coordinatingConjunctionsRate", "subordinatingPrepositionsAndConjunctionsRate", "toBeVerbRate", "numberOfSentencesThatStartWithACoordinatingConjunction", "numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunction", "numberOfSentencesThatStartWithAPronoun", "numberOfSentencesThatStartWithAnArticle", "automatedReadabilityIndex", "colemanLiauIndex", "fleshReadingEase", "fleschKincaidGradeLevel", "gunningFogIndex", "lasbarhetsIndex", "smogGrading", "age", "agePerReview", "reviewPerDay", "reviewsPerUser", "reviewsPerUserStdDev", "discussionCount", "userCount", "anonymouseUserCount", "reviewCount", "modifiedLinesRate", "lastThreeMonthsReviewRate", "mostActiveUsersReviewRate", "pageRank", "indegree", "outdegree", "assortativity_inin", "assortativity_inout", "assortativity_outin", "assortativity_outout", "localClusteringCoefficient", "reciprocity", "linkCount", "translationCount"]
 
 # Select only the columns corresponding to the features in the list
 X = data[features_cols]
@@ -47,80 +50,88 @@ X.sample(frac=1)
 # Select qualityClass as the response (y)
 y = data.qualityClass
 
-# print 'Decision Tree'
-# # 10-fold cross-validation with decision tree PREDICTIONS
-# clf = DecisionTreeClassifier(random_state=8)
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+print 'Decision Tree'
+# 10-fold cross-validation with decision tree PREDICTIONS
+clf = DecisionTreeClassifier(random_state=8)
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
-# print 'KNN'
-# # 10-fold cross-validation with knn PREDICTIONS
-# clf = KNeighborsClassifier(n_neighbors=25)
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+print 'KNN'
+# 10-fold cross-validation with knn PREDICTIONS
+clf = KNeighborsClassifier(n_neighbors=49) # NORMAL
+# clf = KNeighborsClassifier(n_neighbors=25) # PARALLEL
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
-# print 'Logistic Regression'
-# # 10-fold cross-validation with logistic regression PREDICTIONS
-# clf = LogisticRegression()
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
-#
-#
-# print 'Naive Bayes'
-# # 10-fold cross-validation with naive bayes PREDICTIONS
-# clf = GaussianNB()
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
-#
-#
-# print 'Random Forest'
-# # 10-fold cross-validation with knn PREDICTIONS
-# clf = RandomForestClassifier(n_estimators=200, random_state=5)
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
-#
-#
-# print 'Support Vector Classifier'
-# # 10-fold cross-validation with support vector classifier PREDICTIONS
-# clf = LinearSVC(dual=False)
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
-#
-#
-# #NORMALIZE DATASET
-# scaler = Normalizer().fit(X)
-# X = scaler.transform(X)
-#
-# print 'Neural Network'
-# # 10-fold cross-validation with mlp PREDICTIONS
-# layers = (50, 30)
-# clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=1000, random_state=1)
-# y_pred = cross_val_predict(clf, X, y, cv=20)
-#
-# print 'Layers: ' + str(layers)
-# print metrics.classification_report(y, y_pred)
-# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+print 'Logistic Regression'
+# 10-fold cross-validation with logistic regression PREDICTIONS
+clf = LogisticRegression()
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+print 'Naive Bayes'
+# 10-fold cross-validation with naive bayes PREDICTIONS
+clf = GaussianNB()
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+print 'Random Forest'
+# 10-fold cross-validation with knn PREDICTIONS
+clf = RandomForestClassifier(n_estimators=200, random_state=5)
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+print 'Support Vector Classifier'
+# 10-fold cross-validation with support vector classifier PREDICTIONS
+clf = LinearSVC(dual=False)
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+#NORMALIZE DATASET
+scaler = Normalizer().fit(X)
+X = scaler.transform(X)
+
+print 'Neural Network'
+# 10-fold cross-validation with mlp PREDICTIONS
+layers = (50, 30)
+clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=(layers), max_iter=1000, random_state=1)
+y_pred = cross_val_predict(clf, X, y, cv=20)
+
+print 'Layers: ' + str(layers)
+print metrics.classification_report(y, y_pred)
+print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+
+
+
+
+
+
 
 
 
@@ -187,11 +198,11 @@ y = data.qualityClass
 
 
 # FEATURE SELECTION
-from sklearn.feature_selection import RFE
-from sklearn.linear_model import LogisticRegression
-model = LogisticRegression()
-rfe = RFE(model, 3)
-fit = rfe.fit(X, y)
-print("Num Features: %d") % fit.n_features_
-print("Selected Features: %s") % fit.support_
-print("Feature Ranking: %s") % fit.ranking_
+#from sklearn.feature_selection import RFE
+#from sklearn.linear_model import LogisticRegression
+#model = LogisticRegression()
+#rfe = RFE(model, 3)
+#fit = rfe.fit(X, y)
+#print("Num Features: %d") % fit.n_features_
+#print("Selected Features: %s") % fit.support_
+#print("Feature Ranking: %s") % fit.ranking_

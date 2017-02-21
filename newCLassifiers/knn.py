@@ -38,9 +38,9 @@ data = pd.read_csv(open(filename))
 
 
 # Feature list
-# features_cols = fieldnames
+features_cols = fieldnames
 
-features_cols = ["characterCount", "wordCount", "sentenceCount", "sectionCount", "meanSectionSize", "meanParagraphSize", "largestSectionSize", "shortestSectionSize", "sectionSizeStandardDeviation", "subsectionCount", "meanOfSubsectionsPerSection", "abstractSize", "citationCount", "citationCountPerTextLength", "citationCountPerSection", "externalLinksPerTextLength", "externalLinksCount", "externalLinksPerSection", "imageCount", "imagePerSection", "largestSentenceSize", "largeSentenceRate", "shortSentenceRate", "modalAuxiliaryVerbCount", "questionCount", "pronounCount", "passiveVoiceCount", "coordinatingConjunctionsRate", "subordinatingPrepositionsAndConjunctionsRate", "toBeVerbRate", "numberOfSentencesThatStartWithACoordinatingConjunction", "numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunction", "numberOfSentencesThatStartWithAPronoun", "numberOfSentencesThatStartWithAnArticle", "automatedReadabilityIndex", "colemanLiauIndex", "fleshReadingEase", "fleschKincaidGradeLevel", "gunningFogIndex", "lasbarhetsIndex", "smogGrading", "age", "agePerReview", "reviewPerDay", "reviewsPerUser", "reviewsPerUserStdDev", "discussionCount", "userCount", "anonymouseUserCount", "reviewCount", "modifiedLinesRate", "lastThreeMonthsReviewRate", "mostActiveUsersReviewRate", "pageRank", "indegree", "outdegree", "assortativity_inin", "assortativity_inout", "assortativity_outin", "assortativity_outout", "localClusteringCoefficient", "reciprocity", "linkCount", "translationCount"]
+# features_cols = ["characterCount", "wordCount", "sentenceCount", "sectionCount", "meanSectionSize", "meanParagraphSize", "largestSectionSize", "shortestSectionSize", "sectionSizeStandardDeviation", "subsectionCount", "meanOfSubsectionsPerSection", "abstractSize", "citationCount", "citationCountPerTextLength", "citationCountPerSection", "externalLinksPerTextLength", "externalLinksCount", "externalLinksPerSection", "imageCount", "imagePerSection", "largestSentenceSize", "largeSentenceRate", "shortSentenceRate", "modalAuxiliaryVerbCount", "questionCount", "pronounCount", "passiveVoiceCount", "coordinatingConjunctionsRate", "subordinatingPrepositionsAndConjunctionsRate", "toBeVerbRate", "numberOfSentencesThatStartWithACoordinatingConjunction", "numberOfSentencesThatStartWithASubordinatingPrepositionOrConjunction", "numberOfSentencesThatStartWithAPronoun", "numberOfSentencesThatStartWithAnArticle", "automatedReadabilityIndex", "colemanLiauIndex", "fleshReadingEase", "fleschKincaidGradeLevel", "gunningFogIndex", "lasbarhetsIndex", "smogGrading", "age", "agePerReview", "reviewPerDay", "reviewsPerUser", "reviewsPerUserStdDev", "discussionCount", "userCount", "anonymouseUserCount", "reviewCount", "modifiedLinesRate", "lastThreeMonthsReviewRate", "mostActiveUsersReviewRate", "pageRank", "indegree", "outdegree", "assortativity_inin", "assortativity_inout", "assortativity_outin", "assortativity_outout", "localClusteringCoefficient", "reciprocity", "linkCount", "translationCount"]
 
 
 # Select only the columns corresponding to the features in the list
@@ -54,12 +54,12 @@ y = data.qualityClass
 
 # print 'BEFORE Feature Selection'
 # # 10-fold cross-validation with knn PREDICTIONS
-clf = KNeighborsClassifier(n_neighbors=50)
-y_pred = cross_val_predict(clf, X, y, cv=10)
-
-print metrics.classification_report(y, y_pred)
-print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+# clf = KNeighborsClassifier(n_neighbors=50)
+# y_pred = cross_val_predict(clf, X, y, cv=10)
+#
+# print metrics.classification_report(y, y_pred)
+# print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+# print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
@@ -111,7 +111,7 @@ k_range = range(1, 100)
 k_scores = []
 for k in k_range:
    clf = KNeighborsClassifier(n_neighbors=k)
-   scores = cross_val_score(clf, X, y, cv=10, scoring='accuracy')
+   scores = cross_val_score(clf, X, y, cv=20, scoring='accuracy')
    k_scores.append(scores.mean())
 print k_scores
 
