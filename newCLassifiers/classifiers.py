@@ -129,15 +129,15 @@ y = data.qualityClass
 
 
 
-print 'AFTER Feature Selection'
-X_new = SelectKBest(chi2, k=163).fit_transform(X, y)
-# 10-fold cross-validation with logistic regression PREDICTIONS
-clf = clf = RandomForestClassifier(n_estimators=200, random_state=5)
-y_pred = cross_val_predict(clf, X_new, y, cv=20)
-
-print metrics.classification_report(y, y_pred)
-print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
-print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
+#print 'AFTER Feature Selection'
+#X_new = SelectKBest(chi2, k=163).fit_transform(X, y)
+## 10-fold cross-validation with logistic regression PREDICTIONS
+#clf = clf = RandomForestClassifier(n_estimators=200, random_state=5)
+#y_pred = cross_val_predict(clf, X_new, y, cv=20)
+#
+#print metrics.classification_report(y, y_pred)
+#print 'Accuracy: ' + str(metrics.accuracy_score(y, y_pred) )
+#print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 
 
 
@@ -182,3 +182,16 @@ print 'MSE: ' + str(metrics.mean_squared_error(y, y_pred))
 #plt.plot(k_range, k_scores)
 #plt.xlabel('Value of K')
 #plt.ylabel('Cross-Validated Accuracy')
+
+
+
+
+# FEATURE SELECTION
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+rfe = RFE(model, 3)
+fit = rfe.fit(X, y)
+print("Num Features: %d") % fit.n_features_
+print("Selected Features: %s") % fit.support_
+print("Feature Ranking: %s") % fit.ranking_
