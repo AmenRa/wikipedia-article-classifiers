@@ -23,8 +23,8 @@ from sklearn.ensemble import RandomForestClassifier
 import random
 
 # Change it with the name of your dataset
-filename = 'MHDataset.csv'
-# filename = 'MHParallelDataset.csv'
+# filename = 'MHDataset.csv'
+filename = 'MHParallelDataset.csv'
 
 # Extract columns names (fieldnames)
 with open(filename, 'r') as infile:
@@ -57,7 +57,7 @@ features_cols = fieldnames
 # Select only the columns corresponding to the features in the list
 X = data[features_cols]
 
-# X.sample(frac=1)
+X.sample(frac=1)
 
 # Select qualityClass as the response (y)
 y = data.qualityClass
@@ -107,22 +107,22 @@ y = data.qualityClass
 
 # Accuracy 0.58 a 58, partire da 75
 
-k_range = range(1, 300)
-k_scores = []
-for k in k_range:
-   clf = RandomForestClassifier(n_estimators=k, random_state=5)
-   scores = cross_val_score(clf, X, y, cv=20, scoring='accuracy')
-   print str(k) + ' ' + str(scores.mean())
-   k_scores.append(scores.mean())
-print k_scores
-
-import matplotlib.pyplot as plt
-#%matplotlib inline
-
-# plot the value of K for KNN (x-axis) versus the cross-validated accuracy (y-axis)
-plt.plot(k_range, k_scores)
-plt.xlabel('Value of K for KNN')
-plt.ylabel('Cross-Validated Accuracy')
+# k_range = range(75, 300)
+# k_scores = []
+# for k in k_range:
+#    clf = RandomForestClassifier(n_estimators=k, random_state=5)
+#    scores = cross_val_score(clf, X, y, cv=20, scoring='accuracy')
+#    print str(k) + ' ' + str(scores.mean())
+#    k_scores.append(scores.mean())
+# print k_scores
+#
+# import matplotlib.pyplot as plt
+# #%matplotlib inline
+#
+# # plot the value of K for KNN (x-axis) versus the cross-validated accuracy (y-axis)
+# plt.plot(k_range, k_scores)
+# plt.xlabel('Value of K for KNN')
+# plt.ylabel('Cross-Validated Accuracy')
 
 
 
@@ -164,24 +164,30 @@ plt.ylabel('Cross-Validated Accuracy')
 #         if (X[pos]==x).all():
 #             print pos
 
-# from sklearn.feature_selection import f_regression
-#
-# # USE THIS TO FIND BEST FEATURES
-# print "Starting features selection"
-# k_range = range(1, len(features_cols))
-# k_scores = []
-# for k in k_range:
-#   X_new = SelectKBest(f_regression, k=k).fit_transform(X, y)
-#   # X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
-#   clf = RandomForestClassifier(n_estimators=142, random_state=6)
-#   y_pred = cross_val_predict(clf, X_new, y, cv=10)
-#   print str(k) + ' Accuracy: ' + str(metrics.accuracy_score(y, y_pred))
-#   k_scores.append(metrics.accuracy_score(y, y_pred))
-# print k_scores
-#
-# #%matplotlib inline
-#
-# # plot the value of K (x-axis) versus the cross-validated accuracy (y-axis)
-# plt.plot(k_range, k_scores)
-# plt.xlabel('Value of K')
-# plt.ylabel('Cross-Validated Accuracy')
+
+
+
+
+
+
+
+
+
+# USE THIS TO FIND BEST FEATURES
+print "Starting features selection"
+k_range = range(1, len(features_cols))
+k_scores = []
+for k in k_range:
+  X_new = SelectKBest(chi2, k=k).fit_transform(X, y)
+  clf = RandomForestClassifier(n_estimators=200, random_state=5)
+  y_pred = cross_val_predict(clf, X_new, y, cv=20)
+  print str(k) + ' Accuracy: ' + str(metrics.accuracy_score(y, y_pred))
+  k_scores.append(metrics.accuracy_score(y, y_pred))
+print k_scores
+
+#%matplotlib inline
+
+# plot the value of K (x-axis) versus the cross-validated accuracy (y-axis)
+plt.plot(k_range, k_scores)
+plt.xlabel('Value of K')
+plt.ylabel('Cross-Validated Accuracy')
