@@ -1,0 +1,99 @@
+Identifying featured articles in wikipedia: writing style matters
+
+
+Decision Tree
+
+
+             precision    recall  f1-score   support
+
+          1       0.77      0.81      0.79       400
+          2       0.80      0.76      0.78       400
+
+avg / total       0.78      0.78      0.78       800
+
+Accuracy: 0.78125
+MSE: 0.21875
+
+
+KNN
+
+
+             precision    recall  f1-score   support
+
+          1       0.88      0.68      0.77       400
+          2       0.74      0.91      0.81       400
+
+avg / total       0.81      0.79      0.79       800
+
+Accuracy: 0.7925
+MSE: 0.2075
+
+
+Logistic Regression
+
+
+             precision    recall  f1-score   support
+
+          1       0.79      0.82      0.80       400
+          2       0.81      0.78      0.80       400
+
+avg / total       0.80      0.80      0.80       800
+
+Accuracy: 0.8
+MSE: 0.2
+
+
+Naive Bayes
+
+
+             precision    recall  f1-score   support
+
+          1       0.64      0.85      0.73       400
+          2       0.78      0.52      0.62       400
+
+avg / total       0.71      0.68      0.67       800
+
+Accuracy: 0.68375
+MSE: 0.31625
+
+
+Random Forest
+
+
+             precision    recall  f1-score   support
+
+          1       0.88      0.77      0.82       400
+          2       0.80      0.90      0.84       400
+
+avg / total       0.84      0.83      0.83       800
+
+Accuracy: 0.8325
+MSE: 0.1675
+
+
+Support Vector Classifier
+
+
+             precision    recall  f1-score   support
+
+          1       0.78      0.81      0.80       400
+          2       0.81      0.77      0.79       400
+
+avg / total       0.79      0.79      0.79       800
+
+Accuracy: 0.79125
+MSE: 0.20875
+
+
+XGBoost
+
+
+             precision    recall  f1-score   support
+
+          1       0.86      0.80      0.83       400
+          2       0.81      0.86      0.84       400
+
+avg / total       0.83      0.83      0.83       800
+
+Accuracy: 0.83125
+MSE: 0.16875

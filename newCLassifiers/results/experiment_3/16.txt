@@ -1,0 +1,99 @@
+Size matters: word count as a measure of quality on Wikipedia
+
+
+Decision Tree
+
+
+             precision    recall  f1-score   support
+
+          1       0.72      0.71      0.71       400
+          2       0.71      0.72      0.72       400
+
+avg / total       0.72      0.72      0.72       800
+
+Accuracy: 0.71625
+MSE: 0.28375
+
+
+KNN
+
+
+             precision    recall  f1-score   support
+
+          1       0.90      0.66      0.76       400
+          2       0.73      0.93      0.82       400
+
+avg / total       0.82      0.80      0.79       800
+
+Accuracy: 0.795
+MSE: 0.205
+
+
+Logistic Regression
+
+
+             precision    recall  f1-score   support
+
+          1       0.71      0.80      0.75       400
+          2       0.77      0.68      0.72       400
+
+avg / total       0.74      0.74      0.74       800
+
+Accuracy: 0.73875
+MSE: 0.26125
+
+
+Naive Bayes
+
+
+             precision    recall  f1-score   support
+
+          1       0.64      0.84      0.72       400
+          2       0.77      0.52      0.62       400
+
+avg / total       0.70      0.68      0.67       800
+
+Accuracy: 0.68125
+MSE: 0.31875
+
+
+Random Forest
+
+
+             precision    recall  f1-score   support
+
+          1       0.72      0.70      0.71       400
+          2       0.71      0.73      0.72       400
+
+avg / total       0.72      0.72      0.72       800
+
+Accuracy: 0.71875
+MSE: 0.28125
+
+
+Support Vector Classifier
+
+
+             precision    recall  f1-score   support
+
+          1       0.69      0.81      0.74       400
+          2       0.77      0.64      0.70       400
+
+avg / total       0.73      0.72      0.72       800
+
+Accuracy: 0.7225
+MSE: 0.2775
+
+
+XGBoost
+
+
+             precision    recall  f1-score   support
+
+          1       0.80      0.69      0.74       400
+          2       0.73      0.82      0.77       400
+
+avg / total       0.76      0.76      0.76       800
+
+Accuracy: 0.76
+MSE: 0.24
