@@ -1,0 +1,99 @@
+Automatic Quality Assessment of Content Created Collaboratively by Web Communities: A Case Study of Wikipedia's Features
+
+
+Decision Tree
+
+
+             precision    recall  f1-score   support
+
+          1       0.83      0.84      0.84      1200
+          2       0.84      0.83      0.84      1200
+
+avg / total       0.84      0.84      0.84      2400
+
+Accuracy: 0.8354166666666667
+MSE: 0.16458333333333333
+
+
+KNN
+
+
+             precision    recall  f1-score   support
+
+          1       0.86      0.74      0.80      1200
+          2       0.77      0.88      0.82      1200
+
+avg / total       0.82      0.81      0.81      2400
+
+Accuracy: 0.8104166666666667
+MSE: 0.18958333333333333
+
+
+Logistic Regression
+
+
+             precision    recall  f1-score   support
+
+          1       0.85      0.86      0.86      1200
+          2       0.86      0.85      0.85      1200
+
+avg / total       0.86      0.86      0.86      2400
+
+Accuracy: 0.8554166666666667
+MSE: 0.14458333333333334
+
+
+Naive Bayes
+
+
+             precision    recall  f1-score   support
+
+          1       0.66      0.88      0.76      1200
+          2       0.82      0.55      0.66      1200
+
+avg / total       0.74      0.72      0.71      2400
+
+Accuracy: 0.71625
+MSE: 0.28375
+
+
+Random Forest
+
+
+             precision    recall  f1-score   support
+
+          1       0.91      0.87      0.89      1200
+          2       0.87      0.91      0.89      1200
+
+avg / total       0.89      0.89      0.89      2400
+
+Accuracy: 0.8904166666666666
+MSE: 0.10958333333333334
+
+
+Support Vector Classifier
+
+
+             precision    recall  f1-score   support
+
+          1       0.85      0.86      0.85      1200
+          2       0.86      0.85      0.85      1200
+
+avg / total       0.85      0.85      0.85      2400
+
+Accuracy: 0.85375
+MSE: 0.14625
+
+
+XGBoost
+
+
+             precision    recall  f1-score   support
+
+          1       0.92      0.90      0.91      1200
+          2       0.90      0.92      0.91      1200
+
+avg / total       0.91      0.91      0.91      2400
+
+Accuracy: 0.9083333333333333
+MSE: 0.09166666666666666
